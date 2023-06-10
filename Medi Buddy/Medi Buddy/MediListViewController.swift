@@ -8,12 +8,9 @@
 import UIKit
 
 final class MediListViewController: UIViewController {
-    private let mediListCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.scrollDirection = .vertical
+    lazy var mediListCollectionView: UICollectionView = {
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())
         collectionView.register(MediListCell.self, forCellWithReuseIdentifier: "MediListCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -24,10 +21,12 @@ final class MediListViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureNavigationBar()
+        configureSubView()
+        configureConstraint()
     }
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         mediListCollectionView.dataSource = self
     }
     
@@ -54,12 +53,22 @@ final class MediListViewController: UIViewController {
         print("setMedicineList")
     }
     
+    private func configureSubView() {
+        view.addSubview(mediListCollectionView)
+    }
+    
+    func configureListLayout() -> UICollectionViewCompositionalLayout {
+        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        
+        return UICollectionViewCompositionalLayout.list(using: configuration)
+    }
+    
     private func configureConstraint() {
         NSLayoutConstraint.activate([
             mediListCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mediListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mediListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mediListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            mediListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
