@@ -14,6 +14,7 @@
 		D0A72C9F2A33923E00783738 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A72C9D2A33923E00783738 /* LaunchScreen.storyboard */; };
 		D0A72CA72A3396D200783738 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72CA62A3396D200783738 /* Date+.swift */; };
 		D0A72CA92A339A7A00783738 /* MediListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72CA82A339A7A00783738 /* MediListCell.swift */; };
+		D0A72CAB2A34A9A400783738 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72CAA2A34A9A400783738 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D0A72CA02A33923E00783738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A72CA62A3396D200783738 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D0A72CA82A339A7A00783738 /* MediListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediListCell.swift; sourceTree = "<group>"; };
+		D0A72CAA2A34A9A400783738 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				D0A72CA02A33923E00783738 /* Info.plist */,
 				D0A72CA62A3396D200783738 /* Date+.swift */,
 				D0A72CA82A339A7A00783738 /* MediListCell.swift */,
+				D0A72CAA2A34A9A400783738 /* HeaderView.swift */,
 			);
 			path = "Medi Buddy";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A72C972A33923D00783738 /* MediListViewController.swift in Sources */,
+				D0A72CAB2A34A9A400783738 /* HeaderView.swift in Sources */,
 				D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */,
 				D0A72C952A33923D00783738 /* SceneDelegate.swift in Sources */,
 				D0A72CA92A339A7A00783738 /* MediListCell.swift in Sources */,
