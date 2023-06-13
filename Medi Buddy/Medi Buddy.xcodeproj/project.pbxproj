@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D07EAF662A384602009385FD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF652A384602009385FD /* Category.swift */; };
+		D07EAF682A384718009385FD /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF672A384718009385FD /* Medicine.swift */; };
+		D07EAF6A2A384809009385FD /* Medicines.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF692A384809009385FD /* Medicines.swift */; };
+		D07EAF6C2A3848E8009385FD /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF6B2A3848E8009385FD /* Categories.swift */; };
 		D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C922A33923D00783738 /* AppDelegate.swift */; };
 		D0A72C952A33923D00783738 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C942A33923D00783738 /* SceneDelegate.swift */; };
 		D0A72C972A33923D00783738 /* MediListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C962A33923D00783738 /* MediListViewController.swift */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D07EAF652A384602009385FD /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		D07EAF672A384718009385FD /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
+		D07EAF692A384809009385FD /* Medicines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicines.swift; sourceTree = "<group>"; };
+		D07EAF6B2A3848E8009385FD /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		D0A72C8F2A33923D00783738 /* Medi Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Medi Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A72C922A33923D00783738 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0A72C942A33923D00783738 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +77,10 @@
 				D0A72CA62A3396D200783738 /* Date+.swift */,
 				D0A72CA82A339A7A00783738 /* MediListCell.swift */,
 				D0A72CAA2A34A9A400783738 /* HeaderView.swift */,
+				D07EAF652A384602009385FD /* Category.swift */,
+				D07EAF672A384718009385FD /* Medicine.swift */,
+				D07EAF692A384809009385FD /* Medicines.swift */,
+				D07EAF6B2A3848E8009385FD /* Categories.swift */,
 			);
 			path = "Medi Buddy";
 			sourceTree = "<group>";
@@ -146,9 +158,13 @@
 				D0A72C972A33923D00783738 /* MediListViewController.swift in Sources */,
 				D0A72CAB2A34A9A400783738 /* HeaderView.swift in Sources */,
 				D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */,
+				D07EAF6A2A384809009385FD /* Medicines.swift in Sources */,
 				D0A72C952A33923D00783738 /* SceneDelegate.swift in Sources */,
 				D0A72CA92A339A7A00783738 /* MediListCell.swift in Sources */,
 				D0A72CA72A3396D200783738 /* Date+.swift in Sources */,
+				D07EAF6C2A3848E8009385FD /* Categories.swift in Sources */,
+				D07EAF662A384602009385FD /* Category.swift in Sources */,
+				D07EAF682A384718009385FD /* Medicine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
