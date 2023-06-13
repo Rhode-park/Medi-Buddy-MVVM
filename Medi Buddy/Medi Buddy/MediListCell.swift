@@ -30,6 +30,7 @@ final class MediListCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .systemGray6
         titleLabel.text = "약이름"
         countLabel.text = "1/1"
         configureSubview()

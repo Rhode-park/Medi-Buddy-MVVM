@@ -68,16 +68,17 @@ final class MediListViewController: UIViewController {
         
         let layout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .estimated(self.mediListCollectionView.frame.height/16))
+                                                  heightDimension: .fractionalHeight(0.4))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .estimated(self.mediListCollectionView.frame.height/8))
             let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .estimated(self.mediListCollectionView.frame.height/12))
+                                                    heightDimension: .fractionalHeight(0.06))
             let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
             
             let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = .init(top: 0, leading: 0, bottom: 12, trailing: 0)
             section.boundarySupplementaryItems = [header]
             
             return section
@@ -107,8 +108,6 @@ extension MediListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell", for: indexPath) as? MediListCell else { return MediListCell() }
-        cell.layer.borderWidth = 0.3
-        cell.layer.borderColor = CGColor(gray: 0.5, alpha: 0.5)
         
         return cell
     }
