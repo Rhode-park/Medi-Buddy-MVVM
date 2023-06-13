@@ -131,7 +131,7 @@ extension MediListViewController: UICollectionViewDataSource {
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
         
-        header.configureHeader(category: categoryList[indexPath.section].categoryName, time: "06:30am")
+        header.configureHeader(category: categoryList[indexPath.section].categoryName, time: categoryList[indexPath.section].alarmTime.convertTime())
         header.configureIsCellHidden(isCellHidden: isSectionDisplayed[indexPath.section])
         isSectionDisplayed[indexPath.section] = header.isCellHidden
         

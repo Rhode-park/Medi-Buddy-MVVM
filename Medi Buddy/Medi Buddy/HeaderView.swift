@@ -41,7 +41,7 @@ final class HeaderView: UICollectionReusableView {
     
     private let alarmTimeLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
         

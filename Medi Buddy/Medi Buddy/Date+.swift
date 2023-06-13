@@ -17,4 +17,13 @@ extension Date {
         
         return convertedDate
     }
+    
+    func convertTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "a hh시 mm분"
+        
+        let convertedTime = dateFormatter.string(from: self)
+        
+        return convertedTime
+    }
 }
