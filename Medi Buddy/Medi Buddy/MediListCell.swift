@@ -10,7 +10,7 @@ import UIKit
 final class MediListCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .systemGray
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,7 @@ final class MediListCell: UICollectionViewCell {
     
     private let countLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .systemGray
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -31,8 +31,6 @@ final class MediListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        titleLabel.text = "약이름"
-        countLabel.text = "1/1"
         configureSubview()
         configureConstraint()
     }
@@ -56,5 +54,10 @@ final class MediListCell: UICollectionViewCell {
             countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             countLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+    }
+    
+    func configureCell(title: String, count: String) {
+        titleLabel.text = title
+        countLabel.text = count
     }
 }

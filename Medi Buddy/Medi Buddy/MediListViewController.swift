@@ -116,8 +116,14 @@ extension MediListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let title = medicineList.filter({ $0.category == categoryList[indexPath.section] })[indexPath.item].medicineName
+        let maximumDose = medicineList.filter({ $0.category == categoryList[indexPath.section] })[indexPath.item].maximumDose
+        let currentDose = medicineList.filter({ $0.category == categoryList[indexPath.section] })[indexPath.item].currentDose
+        let doseState = "\(currentDose)/\(maximumDose)"
+        
         guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell",
                                                                     for: indexPath) as? MediListCell else { return MediListCell() }
+        cell.configureCell(title: title, count: doseState)
         
         return cell
     }
@@ -131,7 +137,7 @@ extension MediListViewController: UICollectionViewDataSource {
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
         
-        header.configureHeader(category: categoryList[indexPath.section].categoryName, time: categoryList[indexPath.section].alarmTime.convertTime())
+        header.configureHeader(category: categoryList[indexPath.section].categoryName, time: categoryList[indexPath.section].alarmTime.convertTime(), color: .systemCyan)
         header.configureIsCellHidden(isCellHidden: isSectionDisplayed[indexPath.section])
         isSectionDisplayed[indexPath.section] = header.isCellHidden
         

@@ -59,7 +59,6 @@ final class HeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemGray6
-        categoryColorView.backgroundColor = .systemBlue
         configureSubview()
         configureConstraint()
     }
@@ -97,9 +96,10 @@ final class HeaderView: UICollectionReusableView {
         ])
     }
     
-    func configureHeader(category: String, time: String) {
+    func configureHeader(category: String, time: String, color: UIColor) {
         categoryLabel.text = category
         alarmTimeLabel.text = time
+        categoryColorView.backgroundColor = color
     }
     
     func configureIsCellHidden(isCellHidden: Bool) {

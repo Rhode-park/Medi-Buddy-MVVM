@@ -20,7 +20,7 @@ extension Date {
     
     func convertTime() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "a hh시 mm분"
+        dateFormatter.dateFormat = "hh:mm a"
         
         let convertedTime = dateFormatter.string(from: self)
         
