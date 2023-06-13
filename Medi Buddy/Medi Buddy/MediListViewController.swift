@@ -8,6 +8,9 @@
 import UIKit
 
 final class MediListViewController: UIViewController {
+    var isSectionDisplayed = [true, false, false]
+    var dismissHandler: ((IndexPath) -> ())?
+    
     lazy var mediListCollectionView: UICollectionView = {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())
@@ -103,11 +106,16 @@ extension MediListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if isSectionDisplayed[section] == true {
+            return 3
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell", for: indexPath) as? MediListCell else { return MediListCell() }
+        guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell",
+                                                                    for: indexPath) as? MediListCell else { return MediListCell() }
         
         return cell
     }
@@ -120,6 +128,9 @@ extension MediListViewController: UICollectionViewDataSource {
                 withReuseIdentifier: "HeaderView",
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
+        
+        header.configureIsCellHidden(isCellHidden: isSectionDisplayed[indexPath.section])
+        isSectionDisplayed[indexPath.section] = header.isCellHidden
         
         return header
     }

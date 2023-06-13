@@ -8,6 +8,12 @@
 import UIKit
 
 final class HeaderView: UICollectionReusableView {
+    var isCellHidden = false {
+        didSet {
+            configureHideButton()
+        }
+    }
+    
     private let categoryColorView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 4
@@ -42,6 +48,14 @@ final class HeaderView: UICollectionReusableView {
         return label
     }()
     
+    private let hideButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .systemGray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemGray6
@@ -61,6 +75,7 @@ final class HeaderView: UICollectionReusableView {
         self.addSubview(categoryLabel)
         self.addSubview(alarmView)
         self.addSubview(alarmTimeLabel)
+        self.addSubview(hideButton)
     }
     
     private func configureConstraint() {
@@ -77,6 +92,28 @@ final class HeaderView: UICollectionReusableView {
             alarmView.widthAnchor.constraint(equalTo: alarmView.heightAnchor),
             alarmTimeLabel.leadingAnchor.constraint(equalTo: alarmView.trailingAnchor, constant: 8),
             alarmTimeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            hideButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            hideButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            hideButton.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 1/2),
+            hideButton.widthAnchor.constraint(equalTo: hideButton.heightAnchor)
         ])
+    }
+    
+    func configureIsCellHidden(isCellHidden: Bool) {
+        self.isCellHidden = isCellHidden
+    }
+    
+    private func configureHideButton() {
+        if isCellHidden {
+            hideButton.setImage(.init(systemName: "chevron.forward.circle"), for: .normal)
+        } else {
+            hideButton.setImage(.init(systemName: "chevron.down.circle"), for: .normal)
+        }
+        hideButton.addTarget(self, action: #selector(toggleIsDisplayed), for: .touchUpInside)
+    }
+    
+    @objc
+    private func toggleIsDisplayed() {
+        isCellHidden.toggle()
     }
 }
