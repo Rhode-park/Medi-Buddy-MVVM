@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Category {
+struct Category: Equatable {
     let id: UUID
     var categoryName: String
     var categoryColor: Int

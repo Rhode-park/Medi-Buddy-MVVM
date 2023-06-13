@@ -8,7 +8,9 @@
 import UIKit
 
 final class MediListViewController: UIViewController {
-    var isSectionDisplayed = [true, false, false]
+    let categoryList = Categories.shared.list
+    let medicineList = Medicines.shared.list
+    var isSectionDisplayed = [true, true, true]
     var dismissHandler: ((IndexPath) -> ())?
     
     lazy var mediListCollectionView: UICollectionView = {
@@ -102,12 +104,12 @@ final class MediListViewController: UIViewController {
 
 extension MediListViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return categoryList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isSectionDisplayed[section] == true {
-            return 3
+            return medicineList.filter({ $0.category == categoryList[section] }).count
         } else {
             return 0
         }
@@ -129,6 +131,7 @@ extension MediListViewController: UICollectionViewDataSource {
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
         
+        header.configureHeader(category: categoryList[indexPath.section].categoryName, time: "06:30am")
         header.configureIsCellHidden(isCellHidden: isSectionDisplayed[indexPath.section])
         isSectionDisplayed[indexPath.section] = header.isCellHidden
         

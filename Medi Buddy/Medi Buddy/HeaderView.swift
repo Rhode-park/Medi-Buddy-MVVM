@@ -60,8 +60,6 @@ final class HeaderView: UICollectionReusableView {
         super.init(frame: frame)
         self.backgroundColor = .systemGray6
         categoryColorView.backgroundColor = .systemBlue
-        categoryLabel.text = "아침"
-        alarmTimeLabel.text = "06:30 am"
         configureSubview()
         configureConstraint()
     }
@@ -97,6 +95,11 @@ final class HeaderView: UICollectionReusableView {
             hideButton.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 1/2),
             hideButton.widthAnchor.constraint(equalTo: hideButton.heightAnchor)
         ])
+    }
+    
+    func configureHeader(category: String, time: String) {
+        categoryLabel.text = category
+        alarmTimeLabel.text = time
     }
     
     func configureIsCellHidden(isCellHidden: Bool) {
