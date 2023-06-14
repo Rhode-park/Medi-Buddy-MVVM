@@ -2,7 +2,7 @@
 //  MediListViewController.swift
 //  Medi Buddy
 //
-//  Created by Jinah Park on 2023/06/10.
+//  Created by Rhode on 2023/06/10.
 //
 
 import UIKit
@@ -11,7 +11,6 @@ final class MediListViewController: UIViewController {
     let categoryList = Categories.shared.list
     let medicineList = Medicines.shared.list
     var isSectionDisplayed = [true, true, true]
-    var dismissHandler: ((IndexPath) -> ())?
     
     lazy var mediListCollectionView: UICollectionView = {
         
