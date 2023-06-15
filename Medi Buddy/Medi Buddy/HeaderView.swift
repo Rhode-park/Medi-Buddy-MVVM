@@ -117,9 +117,9 @@ final class HeaderView: UICollectionReusableView {
     
     private func configureHideButton() {
         if isCellHidden {
-            hideButton.setImage(.init(systemName: "chevron.forward.circle"), for: .normal)
+            hideButton.setImage(.init(systemName: "chevron.forward"), for: .normal)
         } else {
-            hideButton.setImage(.init(systemName: "chevron.down.circle"), for: .normal)
+            hideButton.setImage(.init(systemName: "chevron.down"), for: .normal)
         }
     }
     
