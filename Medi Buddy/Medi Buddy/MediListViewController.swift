@@ -13,7 +13,6 @@ final class MediListViewController: UIViewController {
     var isSectionDisplayed = [true, true, true]
     
     lazy var mediListCollectionView: UICollectionView = {
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())
         collectionView.register(MediListCell.self, forCellWithReuseIdentifier: "MediListCell")
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
@@ -54,7 +53,10 @@ final class MediListViewController: UIViewController {
     
     @objc
     private func addMedicine() {
-        print("addMedicine")
+        let addMedicineViewController = AddMedicineViewController()
+        addMedicineViewController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+        
+        self.present(addMedicineViewController, animated: true)
     }
     
     @objc

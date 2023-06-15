@@ -12,6 +12,7 @@
 		D07EAF6A2A384809009385FD /* Medicines.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF692A384809009385FD /* Medicines.swift */; };
 		D07EAF6C2A3848E8009385FD /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF6B2A3848E8009385FD /* Categories.swift */; };
 		D07EAF702A3AC449009385FD /* MediCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */; };
+		D07EAF722A3AD19F009385FD /* AddMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF712A3AD19F009385FD /* AddMedicineViewController.swift */; };
 		D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C922A33923D00783738 /* AppDelegate.swift */; };
 		D0A72C952A33923D00783738 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C942A33923D00783738 /* SceneDelegate.swift */; };
 		D0A72C972A33923D00783738 /* MediListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C962A33923D00783738 /* MediListViewController.swift */; };
@@ -28,6 +29,7 @@
 		D07EAF692A384809009385FD /* Medicines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicines.swift; sourceTree = "<group>"; };
 		D07EAF6B2A3848E8009385FD /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediCalendarViewController.swift; sourceTree = "<group>"; };
+		D07EAF712A3AD19F009385FD /* AddMedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineViewController.swift; sourceTree = "<group>"; };
 		D0A72C8F2A33923D00783738 /* Medi Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Medi Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A72C922A33923D00783738 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0A72C942A33923D00783738 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				D0A72C942A33923D00783738 /* SceneDelegate.swift */,
 				D0A72C962A33923D00783738 /* MediListViewController.swift */,
 				D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */,
+				D07EAF712A3AD19F009385FD /* AddMedicineViewController.swift */,
 				D0A72C9B2A33923E00783738 /* Assets.xcassets */,
 				D0A72C9D2A33923E00783738 /* LaunchScreen.storyboard */,
 				D0A72CA02A33923E00783738 /* Info.plist */,
@@ -162,6 +165,7 @@
 				D0A72CAB2A34A9A400783738 /* HeaderView.swift in Sources */,
 				D07EAF702A3AC449009385FD /* MediCalendarViewController.swift in Sources */,
 				D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */,
+				D07EAF722A3AD19F009385FD /* AddMedicineViewController.swift in Sources */,
 				D07EAF6A2A384809009385FD /* Medicines.swift in Sources */,
 				D0A72C952A33923D00783738 /* SceneDelegate.swift in Sources */,
 				D0A72CA92A339A7A00783738 /* MediListCell.swift in Sources */,
