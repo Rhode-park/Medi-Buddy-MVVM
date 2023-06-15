@@ -11,7 +11,7 @@ final class MediListCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemGray
+        label.textColor = .label
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -21,7 +21,7 @@ final class MediListCell: UICollectionViewCell {
     private let countLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemGray
+        label.textColor = .label
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -30,7 +30,7 @@ final class MediListCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         configureSubview()
         configureConstraint()
     }

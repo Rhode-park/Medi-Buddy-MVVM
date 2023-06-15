@@ -33,7 +33,7 @@ final class HeaderView: UICollectionReusableView {
     private let alarmView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "alarm")
-        imageView.tintColor = .systemGray
+        imageView.tintColor = .label
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -42,7 +42,7 @@ final class HeaderView: UICollectionReusableView {
     private let alarmTimeLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemGray
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -50,7 +50,7 @@ final class HeaderView: UICollectionReusableView {
     
     private let hideButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .systemGray
+        button.tintColor = .label
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -58,7 +58,7 @@ final class HeaderView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .systemGray6.withAlphaComponent(0.8)
+        self.backgroundColor = .secondarySystemBackground
         configureSubview()
         configureConstraint()
     }

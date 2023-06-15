@@ -31,7 +31,7 @@ final class MediListViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         mediListCollectionView.dataSource = self
     }
     
