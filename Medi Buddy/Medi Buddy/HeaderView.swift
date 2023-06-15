@@ -58,7 +58,7 @@ final class HeaderView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .systemGray6
+        self.backgroundColor = .systemGray6.withAlphaComponent(0.8)
         configureSubview()
         configureConstraint()
     }
