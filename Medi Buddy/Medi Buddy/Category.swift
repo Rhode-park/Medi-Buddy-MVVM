@@ -8,14 +8,38 @@
 import Foundation
 
 struct Category: Equatable {
-    let id: UUID
-    var categoryName: String
+    enum Name: Equatable {
+        case morning
+        case noon
+        case evening
+        case beforeBed
+        case inNeed
+        case custom(String)
+        
+        var description: String {
+            switch self {
+            case .morning:
+                return "아침"
+            case .noon:
+                return "점심"
+            case .evening:
+                return "저녁"
+            case .beforeBed:
+                return "취침전"
+            case .inNeed:
+                return "필요시"
+            case .custom(let name):
+                return name
+            }
+        }
+    }
+    
+    var categoryName: Name
     var categoryColor: Int
     var alarmTime: Date
     var isAlarmed: Bool
     
-    init(id: UUID = UUID(), categoryName: String, categoryColor: Int = 0x68B984, alarmTime: Date, isAlarmed: Bool) {
-        self.id = id
+    init(categoryName: Name, categoryColor: Int = 0x68B984, alarmTime: Date, isAlarmed: Bool) {
         self.categoryName = categoryName
         self.categoryColor = categoryColor
         self.alarmTime = alarmTime

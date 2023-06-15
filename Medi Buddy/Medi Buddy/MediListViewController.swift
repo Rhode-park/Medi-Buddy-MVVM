@@ -10,7 +10,7 @@ import UIKit
 final class MediListViewController: UIViewController {
     let categoryList = Categories.shared.list
     let medicineList = Medicines.shared.list
-    var isSectionHidden = [false, false, false] {
+    lazy var isSectionHidden = Array(repeating: false, count: categoryList.count) {
         didSet {
             mediListCollectionView.reloadData()
         }
@@ -114,16 +114,16 @@ extension MediListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if !isSectionHidden[section] {
-            return medicineList.filter({ $0.category == categoryList[section] }).count
+            return medicineList.filter({ $0.category == categoryList[section].categoryName }).count
         } else {
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let title = medicineList.filter({ $0.category == categoryList[indexPath.section] })[indexPath.item].medicineName
-        let maximumDose = medicineList.filter({ $0.category == categoryList[indexPath.section] })[indexPath.item].maximumDose
-        let currentDose = medicineList.filter({ $0.category == categoryList[indexPath.section] })[indexPath.item].currentDose
+        let title = medicineList.filter({ $0.category == categoryList[indexPath.section].categoryName })[indexPath.item].medicineName
+        let maximumDose = medicineList.filter({ $0.category == categoryList[indexPath.section].categoryName })[indexPath.item].maximumDose
+        let currentDose = medicineList.filter({ $0.category == categoryList[indexPath.section].categoryName })[indexPath.item].currentDose
         let doseState = "\(currentDose)/\(maximumDose)"
         
         guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell",
@@ -142,7 +142,7 @@ extension MediListViewController: UICollectionViewDataSource {
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
         
-        header.configureHeader(category: categoryList[indexPath.section].categoryName, time: categoryList[indexPath.section].alarmTime.convertTime(), color: .systemCyan)
+        header.configureHeader(category: categoryList[indexPath.section].categoryName.description, time: categoryList[indexPath.section].alarmTime.convertTime(), color: .systemCyan)
         header.configureIsCellHidden(isCellHidden: isSectionHidden[indexPath.section])
         header.hideHandler = { [weak self] isHidden in
             self?.isSectionHidden[indexPath.section] = isHidden

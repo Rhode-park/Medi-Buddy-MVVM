@@ -11,5 +11,5 @@ struct Medicine {
     var medicineName: String
     var maximumDose: Int
     var currentDose: Int
-    var category: Category?
+    var category: Category.Name
 }
