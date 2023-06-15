@@ -54,7 +54,7 @@ final class MediListViewController: UIViewController {
     @objc
     private func addMedicine() {
         let addMedicineViewController = AddMedicineViewController()
-        addMedicineViewController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+        addMedicineViewController.sheetPresentationController?.detents = [.medium()]
         
         self.present(addMedicineViewController, animated: true)
     }
