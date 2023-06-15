@@ -11,8 +11,11 @@ final class HeaderView: UICollectionReusableView {
     var isCellHidden = false {
         didSet {
             configureHideButton()
+            hideHandler?(isCellHidden)
         }
     }
+    
+    var hideHandler: ((Bool) -> ())?
     
     private let categoryColorView: UIView = {
         let view = UIView()
@@ -59,12 +62,18 @@ final class HeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .secondarySystemBackground
+        hideButton.addTarget(self, action: #selector(toggleIsDisplayed), for: .touchUpInside)
         configureSubview()
         configureConstraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        hideHandler = nil
     }
     
     private func configureSubview() {
@@ -90,7 +99,7 @@ final class HeaderView: UICollectionReusableView {
             alarmTimeLabel.leadingAnchor.constraint(equalTo: alarmView.trailingAnchor, constant: 8),
             alarmTimeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             hideButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            hideButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            hideButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             hideButton.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 1/2),
             hideButton.widthAnchor.constraint(equalTo: hideButton.heightAnchor)
         ])
@@ -112,7 +121,6 @@ final class HeaderView: UICollectionReusableView {
         } else {
             hideButton.setImage(.init(systemName: "chevron.down.circle"), for: .normal)
         }
-        hideButton.addTarget(self, action: #selector(toggleIsDisplayed), for: .touchUpInside)
     }
     
     @objc

@@ -10,7 +10,11 @@ import UIKit
 final class MediListViewController: UIViewController {
     let categoryList = Categories.shared.list
     let medicineList = Medicines.shared.list
-    var isSectionDisplayed = [true, true, true]
+    var isSectionHidden = [false, false, false] {
+        didSet {
+            mediListCollectionView.reloadData()
+        }
+    }
     
     lazy var mediListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())
@@ -109,7 +113,7 @@ extension MediListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isSectionDisplayed[section] == true {
+        if !isSectionHidden[section] {
             return medicineList.filter({ $0.category == categoryList[section] }).count
         } else {
             return 0
@@ -139,8 +143,10 @@ extension MediListViewController: UICollectionViewDataSource {
               ) as? HeaderView else { return UICollectionReusableView() }
         
         header.configureHeader(category: categoryList[indexPath.section].categoryName, time: categoryList[indexPath.section].alarmTime.convertTime(), color: .systemCyan)
-        header.configureIsCellHidden(isCellHidden: isSectionDisplayed[indexPath.section])
-        isSectionDisplayed[indexPath.section] = header.isCellHidden
+        header.configureIsCellHidden(isCellHidden: isSectionHidden[indexPath.section])
+        header.hideHandler = { [weak self] isHidden in
+            self?.isSectionHidden[indexPath.section] = isHidden
+        }
         
         return header
     }
