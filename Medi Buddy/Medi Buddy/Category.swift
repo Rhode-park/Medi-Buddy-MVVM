@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Category: Equatable {
-    enum Name: Equatable {
+struct Category: Hashable {
+    enum Name: Hashable {
         case morning
         case noon
         case evening
@@ -34,13 +34,13 @@ struct Category: Equatable {
         }
     }
     
-    var categoryName: Name
+    var name: Name
     var categoryColor: Int
     var alarmTime: Date
     var isAlarmed: Bool
     
     init(categoryName: Name, categoryColor: Int = 0x68B984, alarmTime: Date, isAlarmed: Bool) {
-        self.categoryName = categoryName
+        self.name = categoryName
         self.categoryColor = categoryColor
         self.alarmTime = alarmTime
         self.isAlarmed = isAlarmed

@@ -8,9 +8,15 @@
 import UIKit
 
 final class MediListViewController: UIViewController {
-    let categoryList = Categories.shared.list
-    let medicineList = Medicines.shared.list
-    lazy var isSectionHidden = Array(repeating: false, count: categoryList.count) {
+    var categoryList: [Category] {
+        return MedicineManager.shared.categoryList
+    }
+    
+    var medicineList: [Medicine] {
+        return MedicineManager.shared.list
+    }
+    
+    lazy var isSectionHidden = Array(repeating: false, count: MedicineManager.shared.categoryList.count) {
         didSet {
             mediListCollectionView.reloadData()
         }
@@ -109,26 +115,23 @@ final class MediListViewController: UIViewController {
 
 extension MediListViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return categoryList.count
+        return MedicineManager.shared.categoryList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if !isSectionHidden[section] {
-            return medicineList.filter({ $0.category == categoryList[section].categoryName }).count
+            return medicineList.filter { $0.category == categoryList[section] }.count
         } else {
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let title = medicineList.filter({ $0.category == categoryList[indexPath.section].categoryName })[indexPath.item].medicineName
-        let maximumDose = medicineList.filter({ $0.category == categoryList[indexPath.section].categoryName })[indexPath.item].maximumDose
-        let currentDose = medicineList.filter({ $0.category == categoryList[indexPath.section].categoryName })[indexPath.item].currentDose
-        let doseState = "\(currentDose)/\(maximumDose)"
+        let medicine = medicineList.filter { $0.category == categoryList[indexPath.section] }[indexPath.item]
         
         guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell",
                                                                     for: indexPath) as? MediListCell else { return MediListCell() }
-        cell.configureCell(title: title, count: doseState)
+        cell.configureCell(title: medicine.name, count: medicine.doseState)
         
         return cell
     }
@@ -142,7 +145,9 @@ extension MediListViewController: UICollectionViewDataSource {
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
         
-        header.configureHeader(category: categoryList[indexPath.section].categoryName.description, time: categoryList[indexPath.section].alarmTime.convertTime(), color: .systemCyan)
+        let category = categoryList[indexPath.section]
+        
+        header.configureHeader(category: category.name.description, time: category.alarmTime.convertTime(), color: .systemCyan)
         header.configureIsCellHidden(isCellHidden: isSectionHidden[indexPath.section])
         header.hideHandler = { [weak self] isHidden in
             self?.isSectionHidden[indexPath.section] = isHidden

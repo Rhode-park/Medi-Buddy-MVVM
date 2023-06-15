@@ -8,8 +8,12 @@
 import Foundation
 
 struct Medicine {
-    var medicineName: String
+    var name: String
     var maximumDose: Int
     var currentDose: Int
-    var category: Category.Name
+    var category: Category?
+    
+    var doseState: String {
+        return "\(currentDose)/\(maximumDose)"
+    }
 }
