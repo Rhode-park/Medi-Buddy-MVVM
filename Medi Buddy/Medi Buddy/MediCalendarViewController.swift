@@ -16,7 +16,7 @@ final class MediCalendarViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let monthPicker = UIBarButtonItem(title: "2023년 06월", style: .plain, target: self, action: #selector(pickMonth))
+        let monthPicker = UIBarButtonItem(title: Date().convertMonth(), style: .plain, target: self, action: #selector(pickMonth))
         monthPicker.tintColor = .label
         
         let settingButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"),

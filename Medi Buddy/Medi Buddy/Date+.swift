@@ -8,6 +8,16 @@
 import Foundation
 
 extension Date {
+    func convertMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier:"ko_KR")
+        dateFormatter.dateFormat = "yyyy년 MM월"
+        
+        let convertedMonth = dateFormatter.string(from: self)
+        
+        return convertedMonth
+    }
+    
     func convertDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier:"ko_KR")
