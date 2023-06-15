@@ -52,7 +52,7 @@ final class MediListViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = addMedicineButton
         navigationItem.rightBarButtonItem = settingButton
-        title = Date().convertDate()
+        navigationItem.title = Date().convertDate()
     }
     
     @objc
