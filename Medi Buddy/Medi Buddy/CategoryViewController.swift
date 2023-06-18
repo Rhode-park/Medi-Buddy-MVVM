@@ -46,6 +46,7 @@ final class CategoryViewController: UIViewController {
         configureSubView()
         configureConstraint()
         configureCategoryStackView()
+        addTargetToCategoryButton()
     }
     
     private func configureSubView() {
@@ -113,14 +114,17 @@ final class CategoryViewController: UIViewController {
         categoryList.forEach { category in
             createCategoryHorizontalStackView(category: category)
         }
-        categoryList.forEach { category in
-            createCategoryHorizontalStackView(category: category)
+    }
+    
+    private func addTargetToCategoryButton() {
+        for index in 0...categoryStackView.arrangedSubviews.count-1 {
+            guard let categoryButton = categoryStackView.arrangedSubviews[index].subviews.first as? UIButton else { return }
+            categoryButton.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
         }
-        categoryList.forEach { category in
-            createCategoryHorizontalStackView(category: category)
-        }
-        categoryList.forEach { category in
-            createCategoryHorizontalStackView(category: category)
-        }
+    }
+    
+    @objc
+    private func selectCategory() {
+        print("aa")
     }
 }
