@@ -47,6 +47,16 @@ final class AddMedicineViewController: UIViewController {
         return label
     }()
     
+    lazy var categoryButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .footnote)
+        button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     let doseLabel: UILabel = {
         let label = UILabel()
         label.text = "복용량"
@@ -94,9 +104,19 @@ final class AddMedicineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        categoryButton.backgroundColor = .systemCyan
+        categoryButton.setTitle(MedicineManager.shared.categoryList.first?.name.description, for: .normal)
         doseIntLabel.text = "1정"
         configureSubView()
         configureConstraint()
+    }
+    
+    @objc
+    private func selectCategory() {
+        let categoryViewController = CategoryViewController()
+        categoryViewController.sheetPresentationController?.detents = [.medium()]
+        
+        self.present(categoryViewController, animated: true)
     }
     
     @objc
@@ -121,6 +141,7 @@ final class AddMedicineViewController: UIViewController {
         view.addSubview(doneButton)
         view.addSubview(medicineTextField)
         view.addSubview(categoryLabel)
+        view.addSubview(categoryButton)
         view.addSubview(doseLabel)
         view.addSubview(doseIntLabel)
         view.addSubview(doseIntStepper)
@@ -138,6 +159,8 @@ final class AddMedicineViewController: UIViewController {
             medicineTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             categoryLabel.topAnchor.constraint(equalTo: medicineTextField.bottomAnchor, constant: 28),
             categoryLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            categoryButton.centerYAnchor.constraint(equalTo: categoryLabel.centerYAnchor),
+            categoryButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             doseLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 16),
             doseLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             doseIntStepper.centerYAnchor.constraint(equalTo: doseLabel.centerYAnchor),
