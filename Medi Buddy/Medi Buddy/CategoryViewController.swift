@@ -124,7 +124,7 @@ final class CategoryViewController: UIViewController {
     }
     
     @objc
-    private func selectCategory() {
-        print("aa")
+    private func selectCategory(button: UIButton) {
+        button.isSelected.toggle()
     }
 }
