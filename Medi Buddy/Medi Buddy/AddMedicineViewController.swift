@@ -8,6 +8,16 @@
 import UIKit
 
 final class AddMedicineViewController: UIViewController {
+    var categoryList: CategoryManager {
+        return CategoryManager.shared
+    }
+    
+    var selectedCategory = Category.Name.morning {
+        didSet {
+            categoryButton.setTitle(selectedCategory.description, for: .normal)
+        }
+    }
+    
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -78,15 +88,6 @@ final class AddMedicineViewController: UIViewController {
         let stepper = UIStepper()
         stepper.minimumValue = 1
         stepper.addTarget(self, action: #selector(presentStepper), for: .touchUpInside)
-        
-        let decrementImage = stepper.decrementImage(for: .normal)
-        decrementImage?.withTintColor(.systemCyan)
-        let incrementImage = stepper.incrementImage(for: .normal)
-        incrementImage?.withTintColor(.systemCyan)
-        
-        stepper.setDecrementImage(decrementImage, for: .normal)
-        stepper.setIncrementImage(incrementImage, for: .normal)
-        
         stepper.translatesAutoresizingMaskIntoConstraints = false
         
         return stepper
@@ -105,7 +106,7 @@ final class AddMedicineViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         categoryButton.backgroundColor = .systemCyan
-        categoryButton.setTitle(MedicineManager.shared.categoryList.first?.name.description, for: .normal)
+        categoryButton.setTitle(categoryList.list.first?.name.description, for: .normal)
         doseIntLabel.text = "1정"
         configureSubView()
         configureConstraint()
@@ -115,6 +116,12 @@ final class AddMedicineViewController: UIViewController {
     private func selectCategory() {
         let categoryViewController = CategoryViewController()
         categoryViewController.sheetPresentationController?.detents = [.medium()]
+        
+        categoryViewController.selectedCategoryHandler = { category in
+            self.selectedCategory = category.name
+        }
+        
+        categoryViewController.selectCategoryButton(selectedCategory: categoryList.getCategory(of: selectedCategory))
         
         self.present(categoryViewController, animated: true)
     }
@@ -161,6 +168,7 @@ final class AddMedicineViewController: UIViewController {
             categoryLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             categoryButton.centerYAnchor.constraint(equalTo: categoryLabel.centerYAnchor),
             categoryButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categoryButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 1/3),
             doseLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 16),
             doseLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             doseIntStepper.centerYAnchor.constraint(equalTo: doseLabel.centerYAnchor),

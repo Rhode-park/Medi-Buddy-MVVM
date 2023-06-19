@@ -12,6 +12,11 @@ final class CategoryViewController: UIViewController {
         return CategoryManager.shared.list
     }
     
+    var categoryButtonList = [UIButton: Category]()
+    var currentSelectedButton: UIButton?
+    
+    var selectedCategoryHandler: ((Category) -> ())?
+    
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -65,7 +70,6 @@ final class CategoryViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureSubView()
         configureConstraint()
-        configureCategoryStackView()
         configureCategoryButton()
     }
     
@@ -106,8 +110,15 @@ final class CategoryViewController: UIViewController {
     
     @objc
     private func doneEditing() {
-        print("doneEditing")
-        self.dismiss(animated: true)
+        defer {
+            self.dismiss(animated: true)
+        }
+        
+        guard let currentSelectedButton else { return }
+        
+        guard let currentSelectedCategory = categoryButtonList[currentSelectedButton] else { return }
+        
+        selectedCategoryHandler?(currentSelectedCategory)
     }
     
     private func createCategoryHorizontalStackView(category: Category) {
@@ -138,6 +149,8 @@ final class CategoryViewController: UIViewController {
             return label
         }()
         
+        categoryButtonList[categoryButton] = category
+        
         categoryStackView.addArrangedSubview(categoryHorizontalStackView)
         categoryHorizontalStackView.addArrangedSubview(categoryButton)
         categoryHorizontalStackView.addArrangedSubview(categoryTitleLabel)
@@ -158,9 +171,19 @@ final class CategoryViewController: UIViewController {
             guard let categoryButton = categoryStackView.arrangedSubviews[index].subviews.first as? UIButton else { return }
             categoryButton.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
         }
+    }
+    
+    func selectCategoryButton(selectedCategory: Category?) {
+        configureCategoryStackView()
         
-        guard let firstCategoryButton = categoryStackView.arrangedSubviews.first?.subviews.first as? UIButton else { return }
-        firstCategoryButton.isSelected = true
+        guard let selectedButton = categoryButtonList.first (where: { $0.value == selectedCategory })?.key else {
+            guard let firstCategoryButton = categoryStackView.arrangedSubviews.first?.subviews.first as? UIButton else { return }
+            firstCategoryButton.isSelected = true
+            
+            return
+        }
+        
+        selectedButton.isSelected = true
     }
     
     @objc
@@ -173,6 +196,6 @@ final class CategoryViewController: UIViewController {
         }
         
         button.isSelected.toggle()
-        
+        currentSelectedButton = button
     }
 }
