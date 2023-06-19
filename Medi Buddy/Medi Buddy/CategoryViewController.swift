@@ -9,8 +9,39 @@ import UIKit
 
 final class CategoryViewController: UIViewController {
     var categoryList: [Category] {
-        return MedicineManager.shared.categoryList
+        return CategoryManager.shared.list
     }
+    
+    lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.addTarget(self, action: #selector(cancelEditing), for: .touchUpInside)
+        button.tintColor = .systemCyan
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    lazy var doneButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.addTarget(self, action: #selector(doneEditing), for: .touchUpInside)
+        button.tintColor = .systemCyan
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    let categoryMainTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "카테고리"
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.textColor = .label
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
     
     let categoryScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -29,17 +60,6 @@ final class CategoryViewController: UIViewController {
         return stackView
     }()
     
-    let categoryMainTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "카테고리"
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        label.textColor = .label
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -50,6 +70,8 @@ final class CategoryViewController: UIViewController {
     }
     
     private func configureSubView() {
+        view.addSubview(cancelButton)
+        view.addSubview(doneButton)
         view.addSubview(categoryMainTitleLabel)
         view.addSubview(categoryScrollView)
         categoryScrollView.addSubview(categoryStackView)
@@ -57,7 +79,11 @@ final class CategoryViewController: UIViewController {
     
     private func configureConstraint() {
         NSLayoutConstraint.activate([
-            categoryMainTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            categoryMainTitleLabel.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 24),
             categoryMainTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             categoryMainTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             categoryScrollView.topAnchor.constraint(equalTo: categoryMainTitleLabel.bottomAnchor, constant: 16),
@@ -71,6 +97,17 @@ final class CategoryViewController: UIViewController {
             categoryStackView.leadingAnchor.constraint(equalTo: categoryScrollView.frameLayoutGuide.leadingAnchor),
             categoryStackView.trailingAnchor.constraint(equalTo: categoryScrollView.frameLayoutGuide.trailingAnchor),
         ])
+    }
+    
+    @objc
+    private func cancelEditing() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc
+    private func doneEditing() {
+        print("doneEditing")
+        self.dismiss(animated: true)
     }
     
     private func createCategoryHorizontalStackView(category: Category) {
@@ -136,5 +173,6 @@ final class CategoryViewController: UIViewController {
         }
         
         button.isSelected.toggle()
+        
     }
 }
