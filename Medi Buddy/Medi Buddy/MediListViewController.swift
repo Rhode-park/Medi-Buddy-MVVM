@@ -81,6 +81,7 @@ final class MediListViewController: UIViewController {
     func configureListLayout() -> UICollectionViewCompositionalLayout {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.scrollDirection = .vertical
+        configuration.interSectionSpacing = 8
         
         let layout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -94,7 +95,8 @@ final class MediListViewController: UIViewController {
             let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = .init(top: 0, leading: 0, bottom: 12, trailing: 0)
+
+            section.contentInsets = .init(top: 0, leading: 0, bottom: -8, trailing: 0)
             section.boundarySupplementaryItems = [header]
             
             return section
