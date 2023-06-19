@@ -46,7 +46,7 @@ final class CategoryViewController: UIViewController {
         configureSubView()
         configureConstraint()
         configureCategoryStackView()
-        addTargetToCategoryButton()
+        configureCategoryButton()
     }
     
     private func configureSubView() {
@@ -116,11 +116,14 @@ final class CategoryViewController: UIViewController {
         }
     }
     
-    private func addTargetToCategoryButton() {
+    private func configureCategoryButton() {
         for index in 0...categoryStackView.arrangedSubviews.count-1 {
             guard let categoryButton = categoryStackView.arrangedSubviews[index].subviews.first as? UIButton else { return }
             categoryButton.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
         }
+        
+        guard let firstCategoryButton = categoryStackView.arrangedSubviews.first?.subviews.first as? UIButton else { return }
+        firstCategoryButton.isSelected = true
     }
     
     @objc
