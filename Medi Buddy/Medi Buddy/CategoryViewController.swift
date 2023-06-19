@@ -128,6 +128,13 @@ final class CategoryViewController: UIViewController {
     
     @objc
     private func selectCategory(button: UIButton) {
+        for index in 0...categoryStackView.arrangedSubviews.count-1 {
+            guard let categoryButton = categoryStackView.arrangedSubviews[index].subviews.first as? UIButton else { return }
+            if categoryButton.isSelected {
+                categoryButton.isSelected = false
+            }
+        }
+        
         button.isSelected.toggle()
     }
 }
