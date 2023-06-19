@@ -10,9 +10,8 @@ import UIKit
 final class MediListCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .label
-        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -20,9 +19,9 @@ final class MediListCell: UICollectionViewCell {
     
     private let countLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .label
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -51,7 +50,7 @@ final class MediListCell: UICollectionViewCell {
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             countLabel.topAnchor.constraint(equalTo: self.topAnchor),
             countLabel.leadingAnchor.constraint(equalTo: self.centerXAnchor),
-            countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 40),
             countLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }

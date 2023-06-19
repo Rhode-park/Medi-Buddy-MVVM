@@ -40,7 +40,7 @@ final class CategoryViewController: UIViewController {
     let categoryMainTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textColor = .label
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +143,7 @@ final class CategoryViewController: UIViewController {
         let categoryTitleLabel: UILabel = {
             let label = UILabel()
             label.text = category.name.description
-            label.font = .preferredFont(forTextStyle: .subheadline)
+            label.font = .preferredFont(forTextStyle: .body)
             label.textColor = .label
             
             return label

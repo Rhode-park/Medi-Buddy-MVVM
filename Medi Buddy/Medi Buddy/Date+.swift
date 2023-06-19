@@ -2,7 +2,7 @@
 //  Date+.swift
 //  Medi Buddy
 //
-//  Created by Jinah Park on 2023/06/10.
+//  Created by Rhode on 2023/06/10.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  HeaderView.swift
 //  Medi Buddy
 //
-//  Created by Jinah Park on 2023/06/10.
+//  Created by Rhode on 2023/06/10.
 //
 
 import UIKit
@@ -27,7 +27,7 @@ final class HeaderView: UICollectionReusableView {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -44,7 +44,7 @@ final class HeaderView: UICollectionReusableView {
     
     private let alarmTimeLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         

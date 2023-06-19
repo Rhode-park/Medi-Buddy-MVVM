@@ -51,7 +51,7 @@ final class AddMedicineViewController: UIViewController {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -60,7 +60,7 @@ final class AddMedicineViewController: UIViewController {
     lazy var categoryButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .footnote)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -70,7 +70,7 @@ final class AddMedicineViewController: UIViewController {
     let doseLabel: UILabel = {
         let label = UILabel()
         label.text = "복용량"
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -78,7 +78,7 @@ final class AddMedicineViewController: UIViewController {
     
     var doseIntLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -96,7 +96,7 @@ final class AddMedicineViewController: UIViewController {
     let memoLabel: UILabel = {
         let label = UILabel()
         label.text = "메모"
-        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
