@@ -12,7 +12,13 @@ final class MediListViewController: UIViewController {
         return MedicineManager.shared.categoryList
     }
     
-    lazy var isSectionHidden = Array(repeating: false, count: MedicineManager.shared.categoryList.count) {
+//    lazy var isSectionHidden = Array(repeating: false, count: MedicineManager.shared.categoryList.count) {
+//        didSet {
+//            mediListCollectionView.reloadData()
+//        }
+//    }
+    
+    lazy var isSectionHidden = [Category: Bool]() {
         didSet {
             mediListCollectionView.reloadData()
         }
@@ -121,7 +127,8 @@ extension MediListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if !isSectionHidden[section] {
+        
+        if !isSectionHidden[CategoryManager.shared.getCategory(of: section), default: false] {
             return MedicineManager.shared.list.filter { $0.category == categoryList[section] }.count
         } else {
             return 0
@@ -150,9 +157,9 @@ extension MediListViewController: UICollectionViewDataSource {
         let category = categoryList[indexPath.section]
         
         header.configureHeader(category: category.name.description, time: category.alarmTime.convertTime(), color: .systemCyan)
-        header.configureIsCellHidden(isCellHidden: isSectionHidden[indexPath.section])
+        header.configureIsCellHidden(isCellHidden: isSectionHidden[CategoryManager.shared.getCategory(of: indexPath.section), default: false])
         header.hideHandler = { [weak self] isHidden in
-            self?.isSectionHidden[indexPath.section] = isHidden
+            self?.isSectionHidden[CategoryManager.shared.getCategory(of: indexPath.section)] = isHidden
         }
         
         return header
