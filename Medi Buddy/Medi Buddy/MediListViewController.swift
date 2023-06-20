@@ -80,8 +80,11 @@ final class MediListViewController: UIViewController {
     
     func configureListLayout() -> UICollectionViewCompositionalLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        configuration.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+        configuration.trailingSwipeActionsConfigurationProvider = { indexPath in
+            let medicineToDelete = MedicineManager.shared.list.filter { $0.category == MedicineManager.shared.categoryList[indexPath.section] }[indexPath.item]
             let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { action, view, actionPerformed in
+                MedicineManager.shared.deleteMedicine(medicine: medicineToDelete)
+                self.mediListCollectionView.reloadData()
                 actionPerformed(true)
             }
 

@@ -5,9 +5,7 @@
 //  Created by Rhode on 2023/06/13.
 //
 
-import Foundation
-
-struct Medicine {
+struct Medicine: Equatable {
     var name: String
     var maximumDose: Int
     var currentDose: Int

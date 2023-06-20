@@ -26,4 +26,9 @@ class MedicineManager {
     func addMedicine(medicine: Medicine) {
         list.append(medicine)
     }
+    
+    func deleteMedicine(medicine: Medicine) {
+        guard let removeIndex = list.firstIndex(of: medicine) else { return }
+        list.remove(at: removeIndex)
+    }
 }
