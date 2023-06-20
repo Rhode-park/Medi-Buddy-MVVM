@@ -62,10 +62,14 @@ final class MediListViewController: UIViewController {
         let addMedicineViewController = AddMedicineViewController()
         addMedicineViewController.sheetPresentationController?.detents = [.medium()]
         addMedicineViewController.addMedicineHandler = { medicine in
-            if MedicineManager.shared.list.contains(medicine) == false {
+            
+            if MedicineManager.shared.list.filter({ $0.name == medicine.name && $0.category == medicine.category }).count != 0 {
+                MedicineManager.shared.updateMedicine(medicine: medicine)
+            } else {
                 MedicineManager.shared.addMedicine(medicine: medicine)
-                self.mediListCollectionView.reloadData()
             }
+            
+            self.mediListCollectionView.reloadData()
         }
         
         self.present(addMedicineViewController, animated: true)
