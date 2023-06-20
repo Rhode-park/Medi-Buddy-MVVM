@@ -12,10 +12,6 @@ final class MediListViewController: UIViewController {
         return MedicineManager.shared.categoryList
     }
     
-    var medicineList: [Medicine] {
-        return MedicineManager.shared.list
-    }
-    
     lazy var isSectionHidden = Array(repeating: false, count: MedicineManager.shared.categoryList.count) {
         didSet {
             mediListCollectionView.reloadData()
@@ -65,6 +61,10 @@ final class MediListViewController: UIViewController {
     private func addMedicine() {
         let addMedicineViewController = AddMedicineViewController()
         addMedicineViewController.sheetPresentationController?.detents = [.medium()]
+        addMedicineViewController.addMedicineHandler = { medicine in
+            MedicineManager.shared.addMedicine(medicine: medicine)
+            self.mediListCollectionView.reloadData()
+        }
         
         self.present(addMedicineViewController, animated: true)
     }
@@ -122,14 +122,14 @@ extension MediListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if !isSectionHidden[section] {
-            return medicineList.filter { $0.category == categoryList[section] }.count
+            return MedicineManager.shared.list.filter { $0.category == categoryList[section] }.count
         } else {
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let medicine = medicineList.filter { $0.category == categoryList[indexPath.section] }[indexPath.item]
+        let medicine = MedicineManager.shared.list.filter { $0.category == categoryList[indexPath.section] }[indexPath.item]
         
         guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell",
                                                                     for: indexPath) as? MediListCell else { return MediListCell() }

@@ -18,6 +18,8 @@ final class AddMedicineViewController: UIViewController {
         }
     }
     
+    var addMedicineHandler: ((Medicine) -> ())?
+    
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -133,8 +135,7 @@ final class AddMedicineViewController: UIViewController {
     
     @objc
     private func doneEditing() {
-        print("doneEditing")
-        self.dismiss(animated: true)
+        validateMedicine()
     }
     
     @objc
@@ -179,5 +180,31 @@ final class AddMedicineViewController: UIViewController {
             memoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         ])
     }
-
+    
+    private func addMedicine(name: String) {
+        let maximumDose = Int(doseIntStepper.value)
+        let category = CategoryManager.shared.getCategory(of: selectedCategory)
+        
+        let medicine = Medicine(name: name, maximumDose: maximumDose, currentDose: .zero, category: category)
+        addMedicineHandler?(medicine)
+    }
+    
+    private func validateMedicine() {
+        guard let medicineName = medicineTextField.text,
+              medicineName != "" else {
+            displayEmptyAlert()
+            
+            return
+        }
+        addMedicine(name: medicineName)
+        self.dismiss(animated: true)
+    }
+    
+    private func displayEmptyAlert() {
+        let alert = UIAlertController(title: nil, message: "추가하고자하는 약의 이름을 입력하시오", preferredStyle: UIAlertController.Style.alert)
+        let okayAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okayAction)
+        
+        present(alert, animated: false)
+    }
 }
