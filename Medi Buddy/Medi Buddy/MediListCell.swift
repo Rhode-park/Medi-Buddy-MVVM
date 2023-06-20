@@ -45,13 +45,13 @@ final class MediListCell: UICollectionViewCell {
     
     private func configureConstraint() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
-            titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            countLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            countLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             countLabel.leadingAnchor.constraint(equalTo: self.centerXAnchor),
             countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 40),
-            countLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            countLabel.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor)
         ])
     }
     

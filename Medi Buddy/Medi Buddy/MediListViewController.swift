@@ -12,12 +12,6 @@ final class MediListViewController: UIViewController {
         return MedicineManager.shared.categoryList
     }
     
-//    lazy var isSectionHidden = Array(repeating: false, count: MedicineManager.shared.categoryList.count) {
-//        didSet {
-//            mediListCollectionView.reloadData()
-//        }
-//    }
-    
     lazy var isSectionHidden = [Category: Bool]() {
         didSet {
             mediListCollectionView.reloadData()
@@ -85,28 +79,17 @@ final class MediListViewController: UIViewController {
     }
     
     func configureListLayout() -> UICollectionViewCompositionalLayout {
-        let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.scrollDirection = .vertical
-        configuration.interSectionSpacing = 8
-        
-        let layout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .fractionalHeight(0.4))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .estimated(self.mediListCollectionView.frame.height/8))
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                    heightDimension: .fractionalHeight(0.06))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-            
-            let section = NSCollectionLayoutSection(group: group)
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+            let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { action, view, actionPerformed in
+                actionPerformed(true)
+            }
 
-            section.contentInsets = .init(top: 0, leading: 0, bottom: -8, trailing: 0)
-            section.boundarySupplementaryItems = [header]
-            
-            return section
-        }, configuration: configuration)
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        configuration.headerMode = .supplementary
+        
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         
         return layout
     }
