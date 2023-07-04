@@ -14,6 +14,8 @@
 		D07EAF702A3AC449009385FD /* MediCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */; };
 		D07EAF722A3AD19F009385FD /* AddMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF712A3AD19F009385FD /* AddMedicineViewController.swift */; };
 		D07EAF742A3B6CE0009385FD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF732A3B6CE0009385FD /* CategoryViewController.swift */; };
+		D07EAF772A5159F8009385FD /* MediListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF762A5159F8009385FD /* MediListViewModel.swift */; };
+		D07EAF7A2A515A0E009385FD /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07EAF792A515A0E009385FD /* Observable.swift */; };
 		D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C922A33923D00783738 /* AppDelegate.swift */; };
 		D0A72C952A33923D00783738 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C942A33923D00783738 /* SceneDelegate.swift */; };
 		D0A72C972A33923D00783738 /* MediListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A72C962A33923D00783738 /* MediListViewController.swift */; };
@@ -32,6 +34,8 @@
 		D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediCalendarViewController.swift; sourceTree = "<group>"; };
 		D07EAF712A3AD19F009385FD /* AddMedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineViewController.swift; sourceTree = "<group>"; };
 		D07EAF732A3B6CE0009385FD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		D07EAF762A5159F8009385FD /* MediListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediListViewModel.swift; sourceTree = "<group>"; };
+		D07EAF792A515A0E009385FD /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D0A72C8F2A33923D00783738 /* Medi Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Medi Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A72C922A33923D00783738 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0A72C942A33923D00783738 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D07EAF752A5159D9009385FD /* MediList */ = {
+			isa = PBXGroup;
+			children = (
+				D0A72C962A33923D00783738 /* MediListViewController.swift */,
+				D07EAF762A5159F8009385FD /* MediListViewModel.swift */,
+			);
+			path = MediList;
+			sourceTree = "<group>";
+		};
+		D07EAF782A5159FC009385FD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D07EAF792A515A0E009385FD /* Observable.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		D0A72C862A33923D00783738 = {
 			isa = PBXGroup;
 			children = (
@@ -74,9 +95,10 @@
 		D0A72C912A33923D00783738 /* Medi Buddy */ = {
 			isa = PBXGroup;
 			children = (
+				D07EAF782A5159FC009385FD /* Common */,
+				D07EAF752A5159D9009385FD /* MediList */,
 				D0A72C922A33923D00783738 /* AppDelegate.swift */,
 				D0A72C942A33923D00783738 /* SceneDelegate.swift */,
-				D0A72C962A33923D00783738 /* MediListViewController.swift */,
 				D07EAF712A3AD19F009385FD /* AddMedicineViewController.swift */,
 				D07EAF732A3B6CE0009385FD /* CategoryViewController.swift */,
 				D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */,
@@ -165,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A72C972A33923D00783738 /* MediListViewController.swift in Sources */,
+				D07EAF7A2A515A0E009385FD /* Observable.swift in Sources */,
 				D0A72CAB2A34A9A400783738 /* HeaderView.swift in Sources */,
 				D07EAF702A3AC449009385FD /* MediCalendarViewController.swift in Sources */,
 				D0A72C932A33923D00783738 /* AppDelegate.swift in Sources */,
@@ -177,6 +200,7 @@
 				D07EAF742A3B6CE0009385FD /* CategoryViewController.swift in Sources */,
 				D07EAF662A384602009385FD /* Category.swift in Sources */,
 				D07EAF682A384718009385FD /* Medicine.swift in Sources */,
+				D07EAF772A5159F8009385FD /* MediListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

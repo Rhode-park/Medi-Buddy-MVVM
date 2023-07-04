@@ -8,14 +8,10 @@
 import UIKit
 
 final class MediListViewController: UIViewController {
+    let viewModel = MediListViewModel()
+    
     var categoryList: [Category] {
         return MedicineManager.shared.categoryList
-    }
-    
-    lazy var isSectionHidden = [Category: Bool]() {
-        didSet {
-            mediListCollectionView.reloadData()
-        }
     }
     
     lazy var mediListCollectionView: UICollectionView = {
@@ -33,6 +29,13 @@ final class MediListViewController: UIViewController {
         configureNavigationBar()
         configureSubView()
         configureConstraint()
+        bind()
+    }
+    
+    func bind() {
+        viewModel.isSectionHiddens.bind { _ in
+            self.mediListCollectionView.reloadData()
+        }
     }
     
     private func configureUI() {
@@ -119,12 +122,7 @@ extension MediListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if !isSectionHidden[CategoryManager.shared.getCategory(of: section), default: false] {
-            return MedicineManager.shared.list.filter { $0.category == categoryList[section] }.count
-        } else {
-            return 0
-        }
+        viewModel.medicineCount(of: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -149,9 +147,9 @@ extension MediListViewController: UICollectionViewDataSource {
         let category = categoryList[indexPath.section]
         
         header.configureHeader(category: category.name.description, time: category.alarmTime.convertTime(), color: .systemCyan)
-        header.configureIsCellHidden(isCellHidden: isSectionHidden[CategoryManager.shared.getCategory(of: indexPath.section), default: false])
+        header.configureIsCellHidden(isCellHidden: viewModel.isSectionHidden(of: indexPath))
         header.hideHandler = { [weak self] isHidden in
-            self?.isSectionHidden[CategoryManager.shared.getCategory(of: indexPath.section)] = isHidden
+            self?.viewModel.hideSection(of: indexPath, isHidden: isHidden)
         }
         
         return header
