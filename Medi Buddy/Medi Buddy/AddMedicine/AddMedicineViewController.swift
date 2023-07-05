@@ -8,15 +8,7 @@
 import UIKit
 
 final class AddMedicineViewController: UIViewController {
-    var categoryList: CategoryManager {
-        return CategoryManager.shared
-    }
-    
-    var selectedCategory = Category.Name.morning {
-        didSet {
-            categoryButton.setTitle(selectedCategory.description, for: .normal)
-        }
-    }
+    let viewModel = AddMedicineViewModel()
     
     var addMedicineHandler: ((Medicine) -> ())?
     
@@ -108,10 +100,17 @@ final class AddMedicineViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         categoryButton.backgroundColor = .systemCyan
-        categoryButton.setTitle(categoryList.list.first?.name.description, for: .normal)
+        categoryButton.setTitle(viewModel.firstCategory(), for: .normal)
         doseIntLabel.text = "1정"
         configureSubView()
         configureConstraint()
+        bind()
+    }
+    
+    private func bind() {
+        viewModel.selectedCategory.bind { categoryName in
+            self.categoryButton.setTitle(categoryName.description, for: .normal)
+        }
     }
     
     @objc
@@ -120,10 +119,10 @@ final class AddMedicineViewController: UIViewController {
         categoryViewController.sheetPresentationController?.detents = [.medium()]
         
         categoryViewController.selectedCategoryHandler = { category in
-            self.selectedCategory = category.name
+            self.viewModel.selectedCategory.value = category.name
         }
         
-        categoryViewController.selectCategoryButton(selectedCategory: categoryList.getCategory(of: selectedCategory))
+        categoryViewController.selectCategoryButton(selectedCategory: viewModel.category())
         
         self.present(categoryViewController, animated: true)
     }
@@ -183,9 +182,7 @@ final class AddMedicineViewController: UIViewController {
     
     private func addMedicine(name: String) {
         let maximumDose = Int(doseIntStepper.value)
-        let category = CategoryManager.shared.getCategory(of: selectedCategory)
-        
-        let medicine = Medicine(name: name, maximumDose: maximumDose, currentDose: .zero, category: category)
+        let medicine = viewModel.addMedicine(name: name, maximumDose: maximumDose)
         addMedicineHandler?(medicine)
     }
     

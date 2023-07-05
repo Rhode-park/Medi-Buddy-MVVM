@@ -28,7 +28,7 @@ final class MediListViewController: UIViewController {
         bind()
     }
     
-    func bind() {
+    private func bind() {
         viewModel.isSectionHiddens.bind { _ in
             self.mediListCollectionView.reloadData()
         }
