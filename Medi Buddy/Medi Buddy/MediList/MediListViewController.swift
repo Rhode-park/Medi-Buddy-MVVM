@@ -10,10 +10,6 @@ import UIKit
 final class MediListViewController: UIViewController {
     let viewModel = MediListViewModel()
     
-    var categoryList: [Category] {
-        return MedicineManager.shared.categoryList
-    }
-    
     lazy var mediListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())
         collectionView.register(MediListCell.self, forCellWithReuseIdentifier: "MediListCell")
@@ -65,13 +61,7 @@ final class MediListViewController: UIViewController {
         let addMedicineViewController = AddMedicineViewController()
         addMedicineViewController.sheetPresentationController?.detents = [.medium()]
         addMedicineViewController.addMedicineHandler = { medicine in
-            
-            if MedicineManager.shared.list.filter({ $0.name == medicine.name && $0.category == medicine.category }).count != 0 {
-                MedicineManager.shared.updateMedicine(medicine: medicine)
-            } else {
-                MedicineManager.shared.addMedicine(medicine: medicine)
-            }
-            
+            self.viewModel.addMedicine(medicine: medicine)
             self.mediListCollectionView.reloadData()
         }
         
@@ -90,9 +80,9 @@ final class MediListViewController: UIViewController {
     func configureListLayout() -> UICollectionViewCompositionalLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.trailingSwipeActionsConfigurationProvider = { indexPath in
-            let medicineToDelete = MedicineManager.shared.list.filter { $0.category == MedicineManager.shared.categoryList[indexPath.section] }[indexPath.item]
+            let medicineToDelete = self.viewModel.medicineToDelete(indexPath: indexPath)
             let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { action, view, actionPerformed in
-                MedicineManager.shared.deleteMedicine(medicine: medicineToDelete)
+                self.viewModel.deleteMedicine(medicine: medicineToDelete)
                 self.mediListCollectionView.reloadData()
                 actionPerformed(true)
             }
@@ -118,7 +108,7 @@ final class MediListViewController: UIViewController {
 
 extension MediListViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return MedicineManager.shared.categoryList.count
+        return viewModel.categoryCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,11 +116,11 @@ extension MediListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let medicine = MedicineManager.shared.list.filter { $0.category == categoryList[indexPath.section] }[indexPath.item]
+        let medicine = viewModel.medicine(of: indexPath)
         
         guard let cell = mediListCollectionView.dequeueReusableCell(withReuseIdentifier: "MediListCell",
                                                                     for: indexPath) as? MediListCell else { return MediListCell() }
-        cell.configureCell(title: medicine.name, count: medicine.doseState)
+        cell.configureCell(medicine: medicine)
         
         return cell
     }
@@ -144,9 +134,9 @@ extension MediListViewController: UICollectionViewDataSource {
                 for: indexPath
               ) as? HeaderView else { return UICollectionReusableView() }
         
-        let category = categoryList[indexPath.section]
+        let category = viewModel.category(of: indexPath)
         
-        header.configureHeader(category: category.name.description, time: category.alarmTime.convertTime(), color: .systemCyan)
+        header.configureHeader(category: category)
         header.configureIsCellHidden(isCellHidden: viewModel.isSectionHidden(of: indexPath))
         header.hideHandler = { [weak self] isHidden in
             self?.viewModel.hideSection(of: indexPath, isHidden: isHidden)

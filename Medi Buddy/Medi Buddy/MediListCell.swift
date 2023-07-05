@@ -55,8 +55,8 @@ final class MediListCell: UICollectionViewCell {
         ])
     }
     
-    func configureCell(title: String, count: String) {
-        titleLabel.text = title
-        countLabel.text = count
+    func configureCell(medicine: Medicine) {
+        titleLabel.text = medicine.name
+        countLabel.text = medicine.doseState
     }
 }
