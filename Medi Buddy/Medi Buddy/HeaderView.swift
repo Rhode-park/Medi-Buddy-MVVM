@@ -8,6 +8,8 @@
 import UIKit
 
 final class HeaderView: UICollectionReusableView {
+    static let reuseIdentifier = String(describing: HeaderView.self)
+    
     var isCellHidden = false {
         didSet {
             configureHideButton()

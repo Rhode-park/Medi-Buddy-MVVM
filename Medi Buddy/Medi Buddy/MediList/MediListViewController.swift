@@ -12,8 +12,8 @@ final class MediListViewController: UIViewController {
     
     lazy var mediListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())
-        collectionView.register(MediListCell.self, forCellWithReuseIdentifier: "MediListCell")
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
+        collectionView.register(MediListCell.self, forCellWithReuseIdentifier: MediListCell.reuseIdentifier)
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
