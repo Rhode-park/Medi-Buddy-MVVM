@@ -176,26 +176,22 @@ final class CategoryViewController: UIViewController {
     func selectCategoryButton(selectedCategory: Category?) {
         configureCategoryStackView()
         
-        guard let selectedButton = categoryButtonList.first (where: { $0.value == selectedCategory })?.key else {
-            guard let firstCategoryButton = categoryStackView.arrangedSubviews.first?.subviews.first as? UIButton else { return }
-            firstCategoryButton.isSelected = true
-            
-            return
-        }
+        guard let selectedButton = categoryButtonList.first (where: { $0.value == selectedCategory })?.key else { return }
         
         selectedButton.isSelected = true
+        currentSelectedButton = selectedButton
     }
     
     @objc
     private func selectCategory(button: UIButton) {
-        for index in 0...categoryStackView.arrangedSubviews.count-1 {
-            guard let categoryButton = categoryStackView.arrangedSubviews[index].subviews.first as? UIButton else { return }
-            if categoryButton.isSelected {
-                categoryButton.isSelected = false
-            }
-        }
+        categoryButtonList.first(where: { (key: UIButton, value: Category) in
+            key.isSelected == true
+        })?.key.isSelected = false
         
         button.isSelected.toggle()
-        currentSelectedButton = button
+        
+        currentSelectedButton = categoryButtonList.first(where: { (key: UIButton, value: Category) in
+            key.isSelected == true
+        })?.key
     }
 }
