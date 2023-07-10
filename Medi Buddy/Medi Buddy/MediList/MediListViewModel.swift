@@ -16,7 +16,7 @@ class MediListViewModel {
         return MedicineManager.shared.categoryList
     }
     
-    let isSectionHiddens: Observable<[Category: Bool]> = .init([Category : Bool]())
+    let isSectionHiddens: Observable<[Category?: Bool]> = .init([Category : Bool]())
 }
 
 extension MediListViewModel {
@@ -33,7 +33,7 @@ extension MediListViewModel {
     }
     
     func medicineCount(of section: Int) -> Int {
-        if !isSectionHiddens.value[CategoryManager.shared.getCategory(of: section), default: false] {
+        if !isSectionHiddens.value[CategoryManager.shared.getCategory(at: section), default: false] {
             return medicineList.filter { $0.category == categoryList[section] }.count
         } else {
             return 0
@@ -57,10 +57,10 @@ extension MediListViewModel {
     }
     
     func hideSection(of indexPath: IndexPath, isHidden: Bool) {
-        isSectionHiddens.value[CategoryManager.shared.getCategory(of: indexPath.section)] = isHidden
+        isSectionHiddens.value[CategoryManager.shared.getCategory(at: indexPath.section)] = isHidden
     }
     
     func isSectionHidden(of indexPath: IndexPath) -> Bool {
-        return isSectionHiddens.value[CategoryManager.shared.getCategory(of: indexPath.section), default: false]
+        return isSectionHiddens.value[CategoryManager.shared.getCategory(at: indexPath.section), default: false]
     }
 }
