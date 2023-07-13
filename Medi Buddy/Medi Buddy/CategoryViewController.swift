@@ -12,10 +12,7 @@ final class CategoryViewController: UIViewController {
         return CategoryManager.shared.list
     }
     
-    private var categoryButtonList = [UIButton: Category]()
-    private var currentSelectedButton: UIButton?
-    
-    private var categorySelectDictionary = [Category: Bool]()
+    private var currentSelectedCategory: Category?
     
     var selectedCategoryHandler: ((Category) -> ())?
     
@@ -120,16 +117,16 @@ final class CategoryViewController: UIViewController {
             self.dismiss(animated: true)
         }
         
-        guard let currentSelectedButton else { return }
-        
-        guard let currentSelectedCategory = categoryButtonList[currentSelectedButton] else { return }
+        guard let currentSelectedCategory else { return }
         
         selectedCategoryHandler?(currentSelectedCategory)
     }
     
     private func createCategoryStackView(category: Category) {
         let categoryStackView = CategoryStackView(category: category, isCategorySelected: false)
-        categorySelectDictionary[category] = categoryStackView.isCategorySelected
+        categoryStackView.categorySelectHandler = { selectedCategory in
+            self.currentSelectedCategory = selectedCategory
+        }
         mainStackView.addArrangedSubview(categoryStackView)
     }
     

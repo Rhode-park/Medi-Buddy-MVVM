@@ -9,11 +9,13 @@ import UIKit
 
 class CategoryStackView: UIStackView {
     private let category: Category?
-    var isCategorySelected: Bool? {
+    private var isCategorySelected: Bool? {
         didSet {
             categoryButton.isSelected.toggle()
         }
     }
+    
+    var categorySelectHandler: ((Category) -> ())?
     
     private let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -76,5 +78,9 @@ class CategoryStackView: UIStackView {
     @objc
     private func selectCategory() {
         isCategorySelected?.toggle()
+        
+        guard let category else { return }
+        
+        categorySelectHandler?(category)
     }
 }
