@@ -8,18 +8,18 @@
 import UIKit
 
 final class CategoryViewController: UIViewController {
-    var categoryList: [Category] {
+    private var categoryList: [Category] {
         return CategoryManager.shared.list
     }
     
-    var categoryButtonList = [UIButton: Category]()
-    var currentSelectedButton: UIButton?
+    private var categoryButtonList = [UIButton: Category]()
+    private var currentSelectedButton: UIButton?
     
-    var categorySelectDictionary = [Category: Bool]()
+    private var categorySelectDictionary = [Category: Bool]()
     
     var selectedCategoryHandler: ((Category) -> ())?
     
-    let cancelButton: UIButton = {
+    private let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .systemCyan
@@ -28,7 +28,7 @@ final class CategoryViewController: UIViewController {
         return button
     }()
     
-    let doneButton: UIButton = {
+    private let doneButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .systemCyan
@@ -37,7 +37,7 @@ final class CategoryViewController: UIViewController {
         return button
     }()
     
-    let mainTitleLabel: UILabel = {
+    private let mainTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
         label.font = UIFont.preferredFont(forTextStyle: .body)
@@ -48,7 +48,7 @@ final class CategoryViewController: UIViewController {
         return label
     }()
     
-    let mainScrollView: UIScrollView = {
+    private let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +56,7 @@ final class CategoryViewController: UIViewController {
         return scrollView
     }()
     
-    let mainStackView: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 12

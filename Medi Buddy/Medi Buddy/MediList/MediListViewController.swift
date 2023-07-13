@@ -8,7 +8,7 @@
 import UIKit
 
 final class MediListViewController: UIViewController {
-    let viewModel = MediListViewModel()
+    private let viewModel = MediListViewModel()
     
     lazy var mediListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureListLayout())

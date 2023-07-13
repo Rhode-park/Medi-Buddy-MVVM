@@ -8,11 +8,11 @@
 import UIKit
 
 final class AddMedicineViewController: UIViewController {
-    let viewModel = AddMedicineViewModel()
+    private let viewModel = AddMedicineViewModel()
     
     var addMedicineHandler: ((Medicine) -> ())?
     
-    let cancelButton: UIButton = {
+    private let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .systemCyan
@@ -21,7 +21,7 @@ final class AddMedicineViewController: UIViewController {
         return button
     }()
     
-    let doneButton: UIButton = {
+    private let doneButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .systemCyan
@@ -30,7 +30,7 @@ final class AddMedicineViewController: UIViewController {
         return button
     }()
     
-    let medicineTextField: UITextField = {
+    private let medicineTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "약 이름"
         textField.font = .preferredFont(forTextStyle: .title2)
@@ -40,7 +40,7 @@ final class AddMedicineViewController: UIViewController {
         return textField
     }()
     
-    let categoryLabel: UILabel = {
+    private let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
         label.font = .preferredFont(forTextStyle: .body)
@@ -49,7 +49,7 @@ final class AddMedicineViewController: UIViewController {
         return label
     }()
     
-    let categoryButton: UIButton = {
+    private let categoryButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.layer.cornerRadius = 8
@@ -58,7 +58,7 @@ final class AddMedicineViewController: UIViewController {
         return button
     }()
     
-    let doseLabel: UILabel = {
+    private let doseLabel: UILabel = {
         let label = UILabel()
         label.text = "복용량"
         label.font = .preferredFont(forTextStyle: .body)
@@ -67,7 +67,7 @@ final class AddMedicineViewController: UIViewController {
         return label
     }()
     
-    var doseIntLabel: UILabel = {
+    private var doseIntLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ final class AddMedicineViewController: UIViewController {
         return label
     }()
     
-    let doseIntStepper: UIStepper = {
+    private let doseIntStepper: UIStepper = {
         let stepper = UIStepper()
         stepper.minimumValue = 1
         stepper.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,7 @@ final class AddMedicineViewController: UIViewController {
         return stepper
     }()
     
-    let memoLabel: UILabel = {
+    private let memoLabel: UILabel = {
         let label = UILabel()
         label.text = "메모"
         label.font = .preferredFont(forTextStyle: .body)
