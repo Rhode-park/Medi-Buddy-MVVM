@@ -15,6 +15,8 @@ final class CategoryViewController: UIViewController {
     var categoryButtonList = [UIButton: Category]()
     var currentSelectedButton: UIButton?
     
+    var categorySelectDictionary = [Category: Bool]()
+    
     var selectedCategoryHandler: ((Category) -> ())?
     
     lazy var cancelButton: UIButton = {
@@ -37,7 +39,7 @@ final class CategoryViewController: UIViewController {
         return button
     }()
     
-    let categoryMainTitleLabel: UILabel = {
+    let mainTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
         label.font = UIFont.preferredFont(forTextStyle: .body)
@@ -48,7 +50,7 @@ final class CategoryViewController: UIViewController {
         return label
     }()
     
-    let categoryScrollView: UIScrollView = {
+    let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +58,7 @@ final class CategoryViewController: UIViewController {
         return scrollView
     }()
     
-    let categoryStackView: UIStackView = {
+    let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 12
@@ -70,15 +72,15 @@ final class CategoryViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureSubView()
         configureConstraint()
-        configureCategoryButton()
+        configureCategoryStackView()
     }
     
     private func configureSubView() {
         view.addSubview(cancelButton)
         view.addSubview(doneButton)
-        view.addSubview(categoryMainTitleLabel)
-        view.addSubview(categoryScrollView)
-        categoryScrollView.addSubview(categoryStackView)
+        view.addSubview(mainTitleLabel)
+        view.addSubview(mainScrollView)
+        mainScrollView.addSubview(mainStackView)
     }
     
     private func configureConstraint() {
@@ -87,19 +89,19 @@ final class CategoryViewController: UIViewController {
             cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            categoryMainTitleLabel.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 24),
-            categoryMainTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            categoryMainTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            categoryScrollView.topAnchor.constraint(equalTo: categoryMainTitleLabel.bottomAnchor, constant: 16),
-            categoryScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            categoryScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            categoryScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            categoryStackView.topAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.topAnchor),
-            categoryStackView.leadingAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.leadingAnchor),
-            categoryStackView.trailingAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.trailingAnchor),
-            categoryStackView.bottomAnchor.constraint(equalTo: categoryScrollView.contentLayoutGuide.bottomAnchor),
-            categoryStackView.leadingAnchor.constraint(equalTo: categoryScrollView.frameLayoutGuide.leadingAnchor),
-            categoryStackView.trailingAnchor.constraint(equalTo: categoryScrollView.frameLayoutGuide.trailingAnchor),
+            mainTitleLabel.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 24),
+            mainTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            mainTitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            mainScrollView.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 16),
+            mainScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            mainScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            mainStackView.topAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.trailingAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: mainScrollView.contentLayoutGuide.bottomAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: mainScrollView.frameLayoutGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: mainScrollView.frameLayoutGuide.trailingAnchor),
         ])
     }
     
@@ -121,77 +123,15 @@ final class CategoryViewController: UIViewController {
         selectedCategoryHandler?(currentSelectedCategory)
     }
     
-    private func createCategoryHorizontalStackView(category: Category) {
-        let categoryHorizontalStackView: UIStackView = {
-            let stackView = UIStackView()
-            stackView.spacing = 8
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            
-            return stackView
-        }()
-        
-        let categoryButton: UIButton = {
-            let button = UIButton()
-            button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
-            button.setImage(UIImage(systemName: "square"), for: .normal)
-            button.tintColor = .systemCyan
-            button.setContentHuggingPriority(.required, for: .horizontal)
-            
-            return button
-        }()
-        
-        let categoryTitleLabel: UILabel = {
-            let label = UILabel()
-            label.text = category.name.description
-            label.font = .preferredFont(forTextStyle: .body)
-            label.textColor = .label
-            
-            return label
-        }()
-        
-        categoryButtonList[categoryButton] = category
-        
-        categoryStackView.addArrangedSubview(categoryHorizontalStackView)
-        categoryHorizontalStackView.addArrangedSubview(categoryButton)
-        categoryHorizontalStackView.addArrangedSubview(categoryTitleLabel)
-        
-        NSLayoutConstraint.activate([
-            categoryHorizontalStackView.widthAnchor.constraint(equalTo: categoryStackView.widthAnchor),
-        ])
+    private func createCategoryStackView(category: Category) {
+        let categoryStackView = CategoryStackView(category: category, isCategorySelected: false)
+        categorySelectDictionary[category] = categoryStackView.isCategorySelected
+        mainStackView.addArrangedSubview(categoryStackView)
     }
     
     private func configureCategoryStackView() {
         categoryList.forEach { category in
-            createCategoryHorizontalStackView(category: category)
+            createCategoryStackView(category: category)
         }
-    }
-    
-    private func configureCategoryButton() {
-        for index in 0...categoryStackView.arrangedSubviews.count-1 {
-            guard let categoryButton = categoryStackView.arrangedSubviews[index].subviews.first as? UIButton else { return }
-            categoryButton.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
-        }
-    }
-    
-    func selectCategoryButton(selectedCategory: Category?) {
-        configureCategoryStackView()
-        
-        guard let selectedButton = categoryButtonList.first (where: { $0.value == selectedCategory })?.key else { return }
-        
-        selectedButton.isSelected = true
-        currentSelectedButton = selectedButton
-    }
-    
-    @objc
-    private func selectCategory(button: UIButton) {
-        categoryButtonList.first(where: { (key: UIButton, value: Category) in
-            key.isSelected == true
-        })?.key.isSelected = false
-        
-        button.isSelected.toggle()
-        
-        currentSelectedButton = categoryButtonList.first(where: { (key: UIButton, value: Category) in
-            key.isSelected == true
-        })?.key
     }
 }
