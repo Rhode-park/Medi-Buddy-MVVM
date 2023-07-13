@@ -12,20 +12,18 @@ final class AddMedicineViewController: UIViewController {
     
     var addMedicineHandler: ((Medicine) -> ())?
     
-    lazy var cancelButton: UIButton = {
+    let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(cancelEditing), for: .touchUpInside)
         button.tintColor = .systemCyan
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
-    lazy var doneButton: UIButton = {
+    let doneButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.addTarget(self, action: #selector(doneEditing), for: .touchUpInside)
         button.tintColor = .systemCyan
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -51,9 +49,8 @@ final class AddMedicineViewController: UIViewController {
         return label
     }()
     
-    lazy var categoryButton: UIButton = {
+    let categoryButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -78,10 +75,9 @@ final class AddMedicineViewController: UIViewController {
         return label
     }()
     
-    lazy var doseIntStepper: UIStepper = {
+    let doseIntStepper: UIStepper = {
         let stepper = UIStepper()
         stepper.minimumValue = 1
-        stepper.addTarget(self, action: #selector(presentStepper), for: .touchUpInside)
         stepper.translatesAutoresizingMaskIntoConstraints = false
         
         return stepper
@@ -104,6 +100,7 @@ final class AddMedicineViewController: UIViewController {
         doseIntLabel.text = "1정"
         configureSubView()
         configureConstraint()
+        configureTarget()
         bind()
     }
     
@@ -111,6 +108,13 @@ final class AddMedicineViewController: UIViewController {
         viewModel.selectedCategory.bind { categoryName in
             self.categoryButton.setTitle(categoryName.description, for: .normal)
         }
+    }
+    
+    private func configureTarget() {
+        cancelButton.addTarget(self, action: #selector(cancelEditing), for: .touchUpInside)
+        doneButton.addTarget(self, action: #selector(doneEditing), for: .touchUpInside)
+        categoryButton.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
+        doseIntStepper.addTarget(self, action: #selector(presentStepper), for: .touchUpInside)
     }
     
     @objc

@@ -19,20 +19,18 @@ final class CategoryViewController: UIViewController {
     
     var selectedCategoryHandler: ((Category) -> ())?
     
-    lazy var cancelButton: UIButton = {
+    let cancelButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(cancelEditing), for: .touchUpInside)
         button.tintColor = .systemCyan
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
-    lazy var doneButton: UIButton = {
+    let doneButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.addTarget(self, action: #selector(doneEditing), for: .touchUpInside)
         button.tintColor = .systemCyan
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -73,6 +71,7 @@ final class CategoryViewController: UIViewController {
         configureSubView()
         configureConstraint()
         configureCategoryStackView()
+        configureTarget()
     }
     
     private func configureSubView() {
@@ -103,6 +102,11 @@ final class CategoryViewController: UIViewController {
             mainStackView.leadingAnchor.constraint(equalTo: mainScrollView.frameLayoutGuide.leadingAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: mainScrollView.frameLayoutGuide.trailingAnchor),
         ])
+    }
+    
+    private func configureTarget() {
+        cancelButton.addTarget(self, action: #selector(cancelEditing), for: .touchUpInside)
+        doneButton.addTarget(self, action: #selector(doneEditing), for: .touchUpInside)
     }
     
     @objc

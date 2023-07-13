@@ -28,7 +28,6 @@ class CategoryStackView: UIStackView {
         button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
         button.setImage(UIImage(systemName: "square"), for: .normal)
         button.tintColor = .systemCyan
-        button.addTarget(CategoryStackView.self, action: #selector(selectCategory), for: .touchUpInside)
         button.setContentHuggingPriority(.required, for: .horizontal)
         
         return button
@@ -51,6 +50,7 @@ class CategoryStackView: UIStackView {
         
         configureSubview()
         configureConstraint()
+        configureTarget()
     }
     
     required init(coder: NSCoder) {
@@ -67,6 +67,10 @@ class CategoryStackView: UIStackView {
         NSLayoutConstraint.activate([
             horizontalStackView.widthAnchor.constraint(equalTo: self.widthAnchor)
         ])
+    }
+    
+    private func configureTarget() {
+        categoryButton.addTarget(self, action: #selector(selectCategory), for: .touchUpInside)
     }
     
     @objc
