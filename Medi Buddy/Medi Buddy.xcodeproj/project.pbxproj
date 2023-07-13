@@ -91,6 +91,44 @@
 			path = AddMedicine;
 			sourceTree = "<group>";
 		};
+		D07EAF8B2A5F8E59009385FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D07EAF672A384718009385FD /* Medicine.swift */,
+				D07EAF692A384809009385FD /* MedicineManager.swift */,
+				D07EAF652A384602009385FD /* Category.swift */,
+				D07EAF6B2A3848E8009385FD /* CategoryManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D07EAF8C2A5F9076009385FD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D07EAF832A5A6409009385FD /* Array+.swift */,
+				D0A72CA62A3396D200783738 /* Date+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D07EAF8D2A5F90BB009385FD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D0A72C922A33923D00783738 /* AppDelegate.swift */,
+				D0A72C942A33923D00783738 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D07EAF8E2A5F9106009385FD /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D0A72CA02A33923E00783738 /* Info.plist */,
+				D0A72C9B2A33923E00783738 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		D0A72C862A33923D00783738 = {
 			isa = PBXGroup;
 			children = (
@@ -110,24 +148,18 @@
 		D0A72C912A33923D00783738 /* Medi Buddy */ = {
 			isa = PBXGroup;
 			children = (
+				D07EAF8D2A5F90BB009385FD /* App */,
+				D07EAF8E2A5F9106009385FD /* Resource */,
 				D07EAF782A5159FC009385FD /* Common */,
+				D07EAF8C2A5F9076009385FD /* Extension */,
+				D07EAF8B2A5F8E59009385FD /* Model */,
 				D07EAF752A5159D9009385FD /* MediList */,
 				D07EAF7B2A553032009385FD /* AddMedicine */,
-				D0A72C922A33923D00783738 /* AppDelegate.swift */,
-				D0A72C942A33923D00783738 /* SceneDelegate.swift */,
 				D07EAF732A3B6CE0009385FD /* CategoryViewController.swift */,
 				D07EAF6F2A3AC449009385FD /* MediCalendarViewController.swift */,
-				D0A72C9B2A33923E00783738 /* Assets.xcassets */,
 				D0A72C9D2A33923E00783738 /* LaunchScreen.storyboard */,
-				D0A72CA02A33923E00783738 /* Info.plist */,
-				D0A72CA62A3396D200783738 /* Date+.swift */,
 				D0A72CA82A339A7A00783738 /* MediListCell.swift */,
 				D0A72CAA2A34A9A400783738 /* HeaderView.swift */,
-				D07EAF652A384602009385FD /* Category.swift */,
-				D07EAF672A384718009385FD /* Medicine.swift */,
-				D07EAF692A384809009385FD /* MedicineManager.swift */,
-				D07EAF6B2A3848E8009385FD /* CategoryManager.swift */,
-				D07EAF832A5A6409009385FD /* Array+.swift */,
 				D07EAF892A5F5AA8009385FD /* CategoryStackView.swift */,
 			);
 			path = "Medi Buddy";
@@ -361,7 +393,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U7WG3SYKJM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Medi Buddy/Info.plist";
+				INFOPLIST_FILE = "Medi Buddy/Resource/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -388,7 +420,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U7WG3SYKJM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Medi Buddy/Info.plist";
+				INFOPLIST_FILE = "Medi Buddy/Resource/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
