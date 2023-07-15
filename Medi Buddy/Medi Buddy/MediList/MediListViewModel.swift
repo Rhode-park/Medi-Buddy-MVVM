@@ -8,11 +8,11 @@
 import Foundation
 
 class MediListViewModel {
-    var medicineList: [Medicine] {
+    private var medicineList: [Medicine] {
         return MedicineManager.shared.list
     }
     
-    var categoryList: [Category] {
+    private var categoryList: [Category] {
         return MedicineManager.shared.categoryList
     }
     
