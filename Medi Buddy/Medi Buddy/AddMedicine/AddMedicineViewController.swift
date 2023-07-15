@@ -126,6 +126,10 @@ final class AddMedicineViewController: UIViewController {
             self.viewModel.selectedCategory.value = category.name
         }
         
+        guard let currentCategory = self.viewModel.category() else { return }
+        
+        categoryViewController.currentCategory(category: currentCategory)
+        
         self.present(categoryViewController, animated: true)
     }
     

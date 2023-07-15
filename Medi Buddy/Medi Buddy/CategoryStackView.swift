@@ -9,6 +9,7 @@ import UIKit
 
 class CategoryStackView: UIStackView {
     private let category: Category?
+    
     var isCategorySelected: Bool? {
         didSet {
             categoryButton.isSelected.toggle()
@@ -82,5 +83,9 @@ class CategoryStackView: UIStackView {
         guard let category else { return }
         
         categorySelectHandler?(category)
+    }
+    
+    func currentCategory(isSelected: Bool) {
+        isCategorySelected = isSelected
     }
 }

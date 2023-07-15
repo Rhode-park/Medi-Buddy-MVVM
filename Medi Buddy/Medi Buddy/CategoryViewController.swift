@@ -140,6 +140,10 @@ final class CategoryViewController: UIViewController {
         categoryList.forEach { category in
             createCategoryStackView(category: category)
         }
+        
+        guard let currentSelectedCategory else { return }
+        
+        categoryStackViewDictionary[currentSelectedCategory]?.currentCategory(isSelected: true)
     }
     
     private func selectCategoryStackView() {
@@ -147,5 +151,9 @@ final class CategoryViewController: UIViewController {
         
         let stackView = categoryStackViewDictionary[previousSelectedCategory]
         stackView?.isCategorySelected = false
+    }
+    
+    func currentCategory(category: Category) {
+        currentSelectedCategory = category
     }
 }
