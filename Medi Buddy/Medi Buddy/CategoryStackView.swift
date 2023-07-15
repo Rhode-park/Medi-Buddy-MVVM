@@ -9,7 +9,7 @@ import UIKit
 
 class CategoryStackView: UIStackView {
     private let category: Category?
-    private var isCategorySelected: Bool? {
+    var isCategorySelected: Bool? {
         didSet {
             categoryButton.isSelected.toggle()
         }

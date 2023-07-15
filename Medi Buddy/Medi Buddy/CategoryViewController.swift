@@ -12,7 +12,10 @@ final class CategoryViewController: UIViewController {
         return CategoryManager.shared.list
     }
     
+    private var categoryStackViewDictionary = [Category: CategoryStackView]()
+    
     private var currentSelectedCategory: Category?
+    private var previousSelectedCategory: Category?
     
     var selectedCategoryHandler: ((Category) -> ())?
     
@@ -125,8 +128,11 @@ final class CategoryViewController: UIViewController {
     private func createCategoryStackView(category: Category) {
         let categoryStackView = CategoryStackView(category: category, isCategorySelected: false)
         categoryStackView.categorySelectHandler = { selectedCategory in
+            self.previousSelectedCategory = self.currentSelectedCategory
+            self.selectCategoryStackView()
             self.currentSelectedCategory = selectedCategory
         }
+        categoryStackViewDictionary[category] = categoryStackView
         mainStackView.addArrangedSubview(categoryStackView)
     }
     
@@ -134,5 +140,12 @@ final class CategoryViewController: UIViewController {
         categoryList.forEach { category in
             createCategoryStackView(category: category)
         }
+    }
+    
+    private func selectCategoryStackView() {
+        guard let previousSelectedCategory else { return }
+        
+        let stackView = categoryStackViewDictionary[previousSelectedCategory]
+        stackView?.isCategorySelected = false
     }
 }
