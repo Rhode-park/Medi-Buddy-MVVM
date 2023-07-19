@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 final class AddMedicineViewModel {
     private var categoryList: CategoryManager {
         return CategoryManager.shared
